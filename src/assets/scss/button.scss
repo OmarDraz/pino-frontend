@@ -1,0 +1,14 @@
+.pino-button{
+    padding: 15px 40px;
+    background-color: #A04422;
+    color: #fff;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    &:hover{
+        background-color: #803519;
+        box-shadow: 7px 10px 15px #0004;
+        transform: translateY(-2px);
+    }
+}

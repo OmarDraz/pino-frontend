@@ -1,0 +1,108 @@
+.pino-dashboard{
+    display: flex;
+    min-height: 100vh;
+    .pino-sidebar{
+        width: 300px;
+        background-color: #FAE8D8;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        box-shadow: -10px 4px 55px -10px #0004;
+        position: relative;
+        transition: all ease-in-out 0.3s;
+        z-index: 99;
+        &.collapsed{
+            width: 0 !important;
+
+            .logo, .sidebar_links{
+                opacity: 0;
+            }
+
+            .collapseBtn{
+                left: -20px;
+                border-radius: 10px 0 0 10px;
+                opacity: 1 !important;
+                z-index: 10;
+                box-shadow: -4px 0 10px #0004;
+                svg{
+                    transform: rotate(180deg);
+                }
+            }
+        }
+        .collapseBtn{
+            background-color: #A04422;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 65px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 0 10px 10px 0;
+            box-shadow: 4px 0 10px #0004;
+            transition: all ease-in-out 0.3s;
+            cursor: pointer;
+            svg{
+                transition: all ease 1s;
+                height: 18px;
+                fill: #fff;
+            }
+        }
+        .logo{
+            width: 200px;
+            object-fit: cover;
+            transition: all ease-in-out 0.3s;
+            margin: 30px auto;
+        }
+
+        .sidebar_links{
+            transition: all ease-in-out 0.3s;
+
+            .nav_link{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 15px;
+                transition: ease-in-out .2s;
+                text-decoration: none;
+                color: $text_color;
+                text-wrap: nowrap;
+                &:hover{
+                    background: #FAF4E7;
+                }
+                &.active{
+                    background: #FAF4E7;
+                }
+            }
+        }
+
+        .nav_link{
+            &.logout{
+                position: absolute;
+                cursor: pointer;
+                bottom: 0;
+                width: 100%;
+            }
+        }
+
+    }
+
+    .content{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .pino-dashboard{
+        .pino-sidebar{
+            position: fixed;
+        }
+    }
+}

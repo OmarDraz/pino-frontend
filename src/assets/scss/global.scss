@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Noto+Naskh+Arabic:wght@500&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+}
+
+$text_color: #102E4F;
+
+body{
+    box-sizing: border-box;
+    background-image: url(../imgs/1.png);
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: $text_color;
+    font-family: 'Noto Naskh Arabic', serif;
+}

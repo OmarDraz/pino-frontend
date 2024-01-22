@@ -1,0 +1,129 @@
+.pino-attendees{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 60px 0;
+    .attendees{
+        width: 100%;
+        margin-top: 60px;
+        .item{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding: 35px 40px;
+            background-color: rgba(250, 232, 216, 0.75);
+            position: relative;
+            &.fade-in {
+                animation: fadeInAnimation 1s linear;
+              }
+              
+            @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+            }
+            &:last-child{
+                margin-bottom: 0;
+            }
+            .persons{
+                position: absolute;
+                padding: 10px;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #A04422;
+                color: #fff;
+                border-radius: 0 0 10px 10px;
+                text-align: center;
+                box-shadow: 0 4px 4px 0 #0003;
+            }
+            
+            .accept-remove{
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 10px;
+                .accept{
+                    padding: 10px;
+                    background-color: #39A937;
+                    color: #fff;
+                }
+                .remove{
+                    padding: 10px;
+                    background-color: #A04422;
+                    color: #fff;
+                }
+                .accept, .remove{
+                    border-radius: 10px 10px 0 0;
+                    box-shadow: 0 -4px 4px 0 #0003;
+                    cursor: pointer;
+                }
+            }
+
+            .name, .phone, .status, .time-elapsed{
+                font-size: 20px;
+                font-weight: 600;
+            }
+            .name{
+                margin-bottom: 25px;
+                font-size: 24px;
+            }
+            .time-elapsed{
+                margin-top: 25px;
+            }
+            .status{
+                padding: 10px 20px;
+                text-align: center;
+                background-color: #A04422;
+                width: auto;
+                border-radius: 10px;
+                color: #fff;
+                &.status-now{
+                    background-color: #39A937;
+                }
+
+                &.status-recent{
+                    background-color: #D3AA40;
+                }
+
+                &.status-long{
+                    background-color: #A04422;
+                }
+            }
+            .whatsappIcon{
+                font-size: 30px;
+                fill: #39A937;
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width: 991px){
+    .pino-attendees{
+        .attendees{
+            .item{
+                flex-direction: column;
+                .persons{
+                    left: 0;
+                    transform: translateX(0);
+                }
+                .phone{
+                    margin-bottom: 25px;
+                }
+                .item{
+                    .accept-remove{
+                        left: 0;
+                        transform: translateX(0);
+                    }
+                }
+            }
+        }
+    }
+}

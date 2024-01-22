@@ -1,0 +1,409 @@
+/* ==============================================================================================================================
+														[ * Global Element ]
+===============================================================================================================================*/
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Noto+Naskh+Arabic:wght@500&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  box-sizing: border-box;
+  background-image: url(../imgs/1.png);
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: #102E4F;
+  font-family: "Noto Naskh Arabic", serif;
+}
+
+/* ==============================================================================================================================
+														[ * Form Element ]
+===============================================================================================================================*/
+.pino-attendee-form {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pino-attendee-form .logo {
+  width: 180px;
+  object-fit: cover;
+}
+.pino-attendee-form form {
+  height: 650px;
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(250, 232, 216, 0.75);
+  border-radius: 10px;
+}
+.pino-attendee-form form .inputGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.pino-attendee-form form .inputGroup label {
+  margin-bottom: 10px;
+}
+.pino-attendee-form form .inputGroup .input {
+  height: 50px;
+  outline: none;
+  border: none;
+  background-color: rgb(229, 211, 195);
+  padding: 15px;
+}
+.pino-attendee-form .waiting-screen {
+  min-height: 200px;
+}
+.pino-attendee-form .waiting-screen img {
+  width: 180px;
+  margin-bottom: 20px;
+}
+.pino-attendee-form .waiting-screen .time-elapsed, .pino-attendee-form .waiting-screen .people {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.pino-attendee-form .waiting-screen .social-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pino-attendee-form .waiting-screen .social-icons a {
+  font-size: 18px;
+  color: #A04422;
+}
+.pino-attendee-form .waiting-screen .welcomeMessage {
+  text-align: center;
+  color: #A04422;
+  font-weight: 600;
+}
+
+/* ==============================================================================================================================
+														[ * Button Element ]
+===============================================================================================================================*/
+.pino-button {
+  padding: 15px 40px;
+  background-color: #A04422;
+  color: #fff;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+.pino-button:hover {
+  background-color: #803519;
+  box-shadow: 7px 10px 15px rgba(0, 0, 0, 0.2666666667);
+  transform: translateY(-2px);
+}
+
+/* ==============================================================================================================================
+														[ * Dashboard Element ]
+===============================================================================================================================*/
+.pino-dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+.pino-dashboard .pino-sidebar {
+  width: 300px;
+  background-color: #FAE8D8;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-shadow: -10px 4px 55px -10px rgba(0, 0, 0, 0.2666666667);
+  position: relative;
+  transition: all ease-in-out 0.3s;
+  z-index: 99;
+}
+.pino-dashboard .pino-sidebar.collapsed {
+  width: 0 !important;
+}
+.pino-dashboard .pino-sidebar.collapsed .logo, .pino-dashboard .pino-sidebar.collapsed .sidebar_links {
+  opacity: 0;
+}
+.pino-dashboard .pino-sidebar.collapsed .collapseBtn {
+  left: -20px;
+  border-radius: 10px 0 0 10px;
+  opacity: 1 !important;
+  z-index: 10;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2666666667);
+}
+.pino-dashboard .pino-sidebar.collapsed .collapseBtn svg {
+  transform: rotate(180deg);
+}
+.pino-dashboard .pino-sidebar .collapseBtn {
+  background-color: #A04422;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 65px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 0 10px 10px 0;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2666666667);
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
+}
+.pino-dashboard .pino-sidebar .collapseBtn svg {
+  transition: all ease 1s;
+  height: 18px;
+  fill: #fff;
+}
+.pino-dashboard .pino-sidebar .logo {
+  width: 200px;
+  object-fit: cover;
+  transition: all ease-in-out 0.3s;
+  margin: 30px auto;
+}
+.pino-dashboard .pino-sidebar .sidebar_links {
+  transition: all ease-in-out 0.3s;
+}
+.pino-dashboard .pino-sidebar .sidebar_links .nav_link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  transition: ease-in-out 0.2s;
+  text-decoration: none;
+  color: #102E4F;
+  text-wrap: nowrap;
+}
+.pino-dashboard .pino-sidebar .sidebar_links .nav_link:hover {
+  background: #FAF4E7;
+}
+.pino-dashboard .pino-sidebar .sidebar_links .nav_link.active {
+  background: #FAF4E7;
+}
+.pino-dashboard .pino-sidebar .nav_link.logout {
+  position: absolute;
+  cursor: pointer;
+  bottom: 0;
+  width: 100%;
+}
+.pino-dashboard .content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 991px) {
+  .pino-dashboard .pino-sidebar {
+    position: fixed;
+  }
+}
+/* ==============================================================================================================================
+														[ * Attendees Element ]
+===============================================================================================================================*/
+.pino-attendees {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 60px 0;
+}
+.pino-attendees .attendees {
+  width: 100%;
+  margin-top: 60px;
+}
+.pino-attendees .attendees .item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding: 35px 40px;
+  background-color: rgba(250, 232, 216, 0.75);
+  position: relative;
+}
+.pino-attendees .attendees .item.fade-in {
+  animation: fadeInAnimation 1s linear;
+}
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.pino-attendees .attendees .item:last-child {
+  margin-bottom: 0;
+}
+.pino-attendees .attendees .item .persons {
+  position: absolute;
+  padding: 10px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #A04422;
+  color: #fff;
+  border-radius: 0 0 10px 10px;
+  text-align: center;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.pino-attendees .attendees .item .accept-remove {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+.pino-attendees .attendees .item .accept-remove .accept {
+  padding: 10px;
+  background-color: #39A937;
+  color: #fff;
+}
+.pino-attendees .attendees .item .accept-remove .remove {
+  padding: 10px;
+  background-color: #A04422;
+  color: #fff;
+}
+.pino-attendees .attendees .item .accept-remove .accept, .pino-attendees .attendees .item .accept-remove .remove {
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -4px 4px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.pino-attendees .attendees .item .name, .pino-attendees .attendees .item .phone, .pino-attendees .attendees .item .status, .pino-attendees .attendees .item .time-elapsed {
+  font-size: 20px;
+  font-weight: 600;
+}
+.pino-attendees .attendees .item .name {
+  margin-bottom: 25px;
+  font-size: 24px;
+}
+.pino-attendees .attendees .item .time-elapsed {
+  margin-top: 25px;
+}
+.pino-attendees .attendees .item .status {
+  padding: 10px 20px;
+  text-align: center;
+  background-color: #A04422;
+  width: auto;
+  border-radius: 10px;
+  color: #fff;
+}
+.pino-attendees .attendees .item .status.status-now {
+  background-color: #39A937;
+}
+.pino-attendees .attendees .item .status.status-recent {
+  background-color: #D3AA40;
+}
+.pino-attendees .attendees .item .status.status-long {
+  background-color: #A04422;
+}
+.pino-attendees .attendees .item .whatsappIcon {
+  font-size: 30px;
+  fill: #39A937;
+}
+
+@media screen and (max-width: 991px) {
+  .pino-attendees .attendees .item {
+    flex-direction: column;
+  }
+  .pino-attendees .attendees .item .persons {
+    left: 0;
+    transform: translateX(0);
+  }
+  .pino-attendees .attendees .item .phone {
+    margin-bottom: 25px;
+  }
+  .pino-attendees .attendees .item .item .accept-remove {
+    left: 0;
+    transform: translateX(0);
+  }
+}
+/* ==============================================================================================================================
+														[ * Modal Element ]
+===============================================================================================================================*/
+.pino-modal-container {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+.pino-modal-container .modal-content-large {
+  width: 55%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 7px 10px 15px rgba(0, 0, 0, 0.2666666667);
+  position: relative;
+}
+
+/* ==============================================================================================================================
+														[ * inout Element ]
+===============================================================================================================================*/
+.pino-inputGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.pino-inputGroup label {
+  margin-bottom: 10px;
+}
+.pino-inputGroup .input {
+  height: 50px;
+  outline: none;
+  border: none;
+  background-color: rgb(229, 211, 195);
+  padding: 15px;
+}
+
+/* ==============================================================================================================================
+														[ * Client Choose Branch Element ]
+===============================================================================================================================*/
+.pino-client-choose-branch {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.pino-client-choose-branch .logo {
+  width: 200px;
+  object-fit: cover;
+}
+.pino-client-choose-branch h3 {
+  font-size: 45px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+.pino-client-choose-branch .branches {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+}
+.pino-client-choose-branch .branches a {
+  padding: 20px 40px;
+  background-color: rgba(250, 232, 216, 0.75);
+  border-radius: 10px;
+  color: #A04422;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 600;
+  transition: all ease 0.3s;
+}
+.pino-client-choose-branch .branches a:hover {
+  box-shadow: 7px 10px 15px rgba(0, 0, 0, 0.2666666667);
+}
+
+/*# sourceMappingURL=style.css.map */

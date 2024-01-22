@@ -1,0 +1,17 @@
+.pino-inputGroup{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
+    label{
+        margin-bottom: 10px;
+    }
+    .input{
+        height: 50px;
+        outline: none;
+        border: none;
+        background-color: rgb(229, 211, 195);     
+        padding: 15px;           
+    }
+}

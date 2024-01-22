@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import AttendeeForm from './pages/AttendeeForm';
+import DashboardRoutes from './DashboardRoutes';
+import ChooseBranch from './pages/ChooseBranch';
+import Login from './pages/Login';
+import Logout from './Logout';
+import { useEffect } from 'react';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        {/* ... existing code ... */}
+        <Routes>
+          {/* Client Submission Form */}
+          <Route path="/" exact element={<ChooseBranch />} />
+          <Route path="/submit/:branchId" element={<AttendeeForm />} />
+          <Route path="/submit/:branchId" element={<AttendeeForm />} />
+
+          {/* Admin Dashboard with Pages */}
+          <Route path="/admin/*" element={<DashboardRoutes />} />
+          <Route path='/admin/login' element={<Login />} />
+          <Route path='/logout' element={<Logout />} />
+
+        </Routes>
+    </Router>
   );
 }
 
