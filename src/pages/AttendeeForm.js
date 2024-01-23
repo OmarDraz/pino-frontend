@@ -18,7 +18,7 @@ const AttendeeForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     phone_number: '',
-    num_of_persons: 0,
+    num_of_persons: 1,
     seatPreference: '',
   });
   const [modal, setModal] = useState(false);
@@ -30,7 +30,6 @@ const AttendeeForm = () => {
 
   useEffect(() => {
     socket.on('welcomeMessage', (message) => {
-      console.log('Welcome Message:', message);
       setWelcomeMessage(message);
     });
 
@@ -39,6 +38,29 @@ const AttendeeForm = () => {
     };
   }, []);
 
+
+  useEffect(() => {
+    if (modalData) {
+
+      // Start the countdown when modalData is available
+      const countdownInterval = setInterval(async () => {
+        setModalData((prevData) => ({
+          ...prevData,
+          averageWaitingTime: prevData.averageWaitingTime - 1000,
+        }));
+      }, 1000);
+
+
+      // Clear the interval when the countdown reaches 0
+      if (modalData.averageWaitingTime <= 1000) {
+        clearInterval(countdownInterval);
+      }
+ 
+      // Cleanup the interval on component unmount
+      return () => clearInterval(countdownInterval);
+    }
+  }, [modalData]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -46,6 +68,18 @@ const AttendeeForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+        // Verify the number of persons
+        if (formData.num_of_persons < 1) {
+          alert('عدد الأشخاص يجب أن يكون على الأقل 1');
+          return;
+        }
+
+        // Verify the phone number
+        const phoneNumberRegex = /^[0-9]+$/;
+        if (!phoneNumberRegex.test(formData.phone_number)) {
+          alert('رقم الهاتف يجب أن يحتوي على أرقام فقط');
+          return;
+        }
       setModal(true);
 
       // Disable form fields and submit button after submission
@@ -58,7 +92,6 @@ const AttendeeForm = () => {
 
       setModalData(res.data);
       socket.emit('associateSocketId', socket.id);
-      console.log(socket.id);
     } catch (error) {
       console.error('Error submitting attendee:', error);
     }
@@ -96,6 +129,8 @@ const AttendeeForm = () => {
             name="phone_number"
             value={formData.phone_number}
             required
+            pattern="[0-9]+"
+            inputMode="numeric"
             onChange={handleChange}
             disabled={formSubmitted}
           />
@@ -110,6 +145,7 @@ const AttendeeForm = () => {
             name="num_of_persons"
             value={formData.num_of_persons}
             required
+            min="1"
             onChange={handleChange}
             disabled={formSubmitted}
           />

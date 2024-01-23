@@ -12,12 +12,10 @@ function ChooseBranch() {
         <img src={logo} alt='logo' className='logo' />
         <h3>اختر الفرع</h3>
         <div className='branches'>
-            <NavLink to={pathname === '/admin/attendees' ? '/admin/attendees/branch/1' : '/submit/1'}><span>الفرع الاول</span></NavLink>
-            <NavLink to={pathname === '/admin/attendees' ? '/admin/attendees/branch/2' : '/submit/2'}><span>الفرع الثاني</span></NavLink>            
+            <NavLink to={pathname === '/admin/attendees' ? '/admin/attendees/branch/1' : '/submit/1'}><span>بينو الرئيسي</span></NavLink>
+            <NavLink to={pathname === '/admin/attendees' ? '/admin/attendees/branch/2' : '/submit/2'}><span>بينو كاجول</span></NavLink>            
         </div>
-        {
-          console.log(pathname)
-        }
+
     </div>
   )
 }

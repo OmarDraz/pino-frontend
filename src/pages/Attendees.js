@@ -7,6 +7,8 @@ import MdCall from '@meronex/icons/md/MdCall';
 import MdAvTimer from '@meronex/icons/md/MdAvTimer';
 import FaWhatsapp from '@meronex/icons/fa/FaWhatsapp';
 import socket from '../socket';
+import FaHome from '@meronex/icons/fa/FaHome';
+import FaCloudSun from '@meronex/icons/fa/FaCloudSun';
 const Attendees = () => {
   const [attendees, setAttendees] = useState([]);
   const { branchId } = useParams();
@@ -14,14 +16,17 @@ const Attendees = () => {
   const notificationSound = new Audio('/notification.wav');
 
   const playNotificationSound = () => {
-    notificationSound.play();
+    // Check if the user has interacted with the document
+    if (document.visibilityState === 'visible') {
+      notificationSound.play();
+    }
   };
+  
 
   useEffect(() => {
     // Listen for the associateSocketId event and update the ref immediately
     const handleAssociateSocketId = (data) => {
       socketDesIdRef.current = data;
-      console.log("des", data);
     };
 
     socket.on('associateSocketId', handleAssociateSocketId);
@@ -46,7 +51,6 @@ const Attendees = () => {
 
     if (parseInt(branchId) === 1) {
       socket.on('newAttendee1', (data) => {
-        console.log(data);
         setAttendees((prevAttendees) => [...prevAttendees, { ...data, startTime: new Date() }]);
         playNotificationSound();
 
@@ -58,7 +62,6 @@ const Attendees = () => {
       };
     } else if (parseInt(branchId) === 2) {
       socket.on('newAttendee2', (data) => {
-        console.log(data);
         setAttendees((prevAttendees) => [...prevAttendees, { ...data, startTime: new Date() }]);
         playNotificationSound();
 
@@ -122,12 +125,12 @@ const Attendees = () => {
     }
   };
 
-  const displayWhatsapp = (status) => {
+  const displayWhatsapp = (status, phone) => {
     switch (status) {
       case 'وصل منذ قليل':
-        return (<FaWhatsapp className="me-4 whatsappIcon" />);
+        return (<a href={`https://wa.me/${phone}?text=طاولتك بانتظارك!`}><FaWhatsapp className="me-4 whatsappIcon" /></a>);
       case 'طال الانتظار':
-        return (<FaWhatsapp className="me-4 whatsappIcon" />);
+        return (<a href={`https://wa.me/${phone}?text=طاولتك بانتظارك!`}><FaWhatsapp className="me-4 whatsappIcon" /></a>);
       default:
         return '';
     }
@@ -168,26 +171,34 @@ const Attendees = () => {
 
   
       // Remove the submission from the server
-      const res = await axiosInstance.delete(`http://localhost:3000/submissions/${id}`);
+      await axiosInstance.delete(`http://localhost:3000/submissions/${id}`);
     } catch (error) {
       console.error('Error accepting attendee:', error);
     }
   };
 
   const removeAttendee = async (id) => {
-    const res = await axiosInstance.delete(`http://localhost:3000/submissions/${(id)}`);
+    await axiosInstance.delete(`http://localhost:3000/submissions/${(id)}`);
     setAttendees((prevAttendees) => prevAttendees.filter((item) => item.id !== id));
   };
 
   return (
-    <div className='pino-attendees col-lg-7 col-md-10 col-sm-11'>
-      <h2>الانتظار</h2>
+    <div className='pino-attendees col-lg-7 col-md-10 col-sm-12'>
+      <h2 className='fw-bold'>الانتظار</h2>
       <div className='attendees'>
         {attendees.map((item, index) => (
           <div key={index} className='item fade-in'>
+            <div className='details'>
+            {
+            item.seatPreference !== '' && 
+            <span className='ms-2'>
+              {item.seatPreference === 'Indoor' ? <FaHome /> : <FaCloudSun />}
+            </span>
+            }
             <span className='persons'>
               {item.num_of_persons} <br /> اشخاص
             </span>
+            </div>
             {displayAcceptRemove(item.status, item.id)}
             <div className='d-flex flex-column justify-items-between'>
               <div className='name'>
@@ -203,7 +214,7 @@ const Attendees = () => {
                 <div className={`status ${getStatusClass(item.status)}`}>
                   {item.status}
                 </div>
-                {displayWhatsapp(item.status)}
+                {displayWhatsapp(item.status, item.phone_number)}
               </div>
               <div className='time-elapsed'>
                 <MdAvTimer /> مدة الانتظار: {item.elapsedTime}

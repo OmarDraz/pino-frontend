@@ -17,6 +17,7 @@ body {
   min-height: 100vh;
   color: #102E4F;
   font-family: "Noto Naskh Arabic", serif;
+  overflow: hidden;
 }
 
 /* ==============================================================================================================================
@@ -213,11 +214,20 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 60px 0;
+  padding: 40px 0;
+}
+.pino-attendees .attendees::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
 }
 .pino-attendees .attendees {
   width: 100%;
-  margin-top: 60px;
+  margin-top: 40px;
+  height: 590px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  position: relative;
 }
 .pino-attendees .attendees .item {
   display: flex;
@@ -241,17 +251,24 @@ body {
 .pino-attendees .attendees .item:last-child {
   margin-bottom: 0;
 }
-.pino-attendees .attendees .item .persons {
+.pino-attendees .attendees .item .details {
   position: absolute;
-  padding: 10px;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+.pino-attendees .attendees .item .details .persons {
+  padding: 10px;
   background-color: #A04422;
   color: #fff;
   border-radius: 0 0 10px 10px;
   text-align: center;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.pino-attendees .attendees .item .details span svg {
+  font-size: 24px;
 }
 .pino-attendees .attendees .item .accept-remove {
   position: absolute;
@@ -310,10 +327,13 @@ body {
 }
 
 @media screen and (max-width: 991px) {
+  .pino-attendees .attendees {
+    overflow-y: scroll;
+  }
   .pino-attendees .attendees .item {
     flex-direction: column;
   }
-  .pino-attendees .attendees .item .persons {
+  .pino-attendees .attendees .item .details {
     left: 0;
     transform: translateX(0);
   }

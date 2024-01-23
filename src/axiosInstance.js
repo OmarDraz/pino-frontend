@@ -32,7 +32,6 @@ axiosInstance.interceptors.response.use(
       // Check if the token has expired
       if (decodedToken && decodedToken.exp * 1000 < Date.now()) {
         // Token has expired, redirect to login
-        console.log('Token has expired. Redirecting to login.');
         // Clear tokens and redirect to login
         localStorage.removeItem('token');
         window.location.href = '/admin/login';
