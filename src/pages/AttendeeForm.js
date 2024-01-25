@@ -6,7 +6,6 @@ import logo from '../assets/imgs/logo.png';
 import MdAvTimer from '@meronex/icons/md/MdAvTimer';
 import MdEventSeat from '@meronex/icons/md/MdEventSeat';
 import FaFacebookF from '@meronex/icons/fa/FaFacebookF';
-import MdcFoodForkDrink from '@meronex/icons/mdc/MdcFoodForkDrink';
 import { useLocation, useParams } from 'react-router-dom';
 import socket from '../socket';
 
@@ -80,18 +79,23 @@ const AttendeeForm = () => {
           alert('رقم الهاتف يجب أن يحتوي على أرقام فقط');
           return;
         }
-      setModal(true);
-
-      // Disable form fields and submit button after submission
-      setFormSubmitted(true);
 
       const res = await axios.post('http://localhost:3000/api/attendees', {
         ...formData,
         branchId: branchId,
       });
 
-      setModalData(res.data);
-      socket.emit('associateSocketId', socket.id);
+      if(res.data.message === 'عذرا تم تسجيلك مسبقا'){
+        alert(res.data.message)
+      } else{
+        setModal(true);
+
+        // Disable form fields and submit button after submission
+        setFormSubmitted(true);
+        setModalData(res.data);
+        socket.emit('associateSocketId', socket.id);
+      }
+
     } catch (error) {
       console.error('Error submitting attendee:', error);
     }
@@ -185,7 +189,6 @@ const AttendeeForm = () => {
               <MdEventSeat /> أمامك {modalData.order - 1} اشخاص
             </div>
             <div className='social-icons'>
-              <a href="#0"><MdcFoodForkDrink /></a>
               <a href="#0"><FaFacebookF /></a>
             </div>
             </> : <h3 className='welcomeMessage'>{welcomeMessage}</h3>
