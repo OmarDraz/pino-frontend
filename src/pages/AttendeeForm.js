@@ -5,7 +5,7 @@ import Modal from '../components/Modal';
 import logo from '../assets/imgs/logo.png';
 import MdAvTimer from '@meronex/icons/md/MdAvTimer';
 import MdEventSeat from '@meronex/icons/md/MdEventSeat';
-import FaFacebookF from '@meronex/icons/fa/FaFacebookF';
+import MdRestaurant from '@meronex/icons/md/MdRestaurant';
 import { useLocation, useParams } from 'react-router-dom';
 import socket from '../socket';
 
@@ -189,7 +189,7 @@ const AttendeeForm = () => {
               <MdEventSeat /> أمامك {modalData.order - 1} اشخاص
             </div>
             <div className='social-icons'>
-              <a href="#0"><FaFacebookF /></a>
+              <a href={branchId === 1 ? 'https://qr.finedinemenu.com/pino?menu=true' : 'https://qr.finedinemenu.com/bynw-kajwl'}><MdRestaurant /></a>
             </div>
             </> : <h3 className='welcomeMessage'>{welcomeMessage}</h3>
           }
