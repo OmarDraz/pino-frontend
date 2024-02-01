@@ -72,7 +72,7 @@ const Attendees = () => {
         socket.off('newAttendee2');
       };
     }
-  }, [branchId, playNotificationSound]); // Empty dependency array ensures the effect runs only once
+  }, []); // Empty dependency array ensures the effect runs only once
 
   useEffect(() => {
     const intervalId = setInterval(() => {
