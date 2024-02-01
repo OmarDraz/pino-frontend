@@ -40,7 +40,7 @@ const Attendees = () => {
   useEffect(() => {
     const fetchExistingWaitingAttendees = async () => {
       try {
-        const response = await axiosInstance.get(`http://localhost:3000/submissions?branch_id=${parseInt(branchId)}`);
+        const response = await axiosInstance.get(`${process.env.BACKEND_HOST}/submissions?branch_id=${parseInt(branchId)}`);
         setAttendees(response.data);
       } catch (error) {
         console.error('Error fetching existing waiting submissions:', error);
@@ -171,14 +171,14 @@ const Attendees = () => {
 
   
       // Remove the submission from the server
-      await axiosInstance.delete(`http://localhost:3000/submissions/${id}`);
+      await axiosInstance.delete(`${process.env.BACKEND_HOST}/submissions/${id}`);
     } catch (error) {
       console.error('Error accepting attendee:', error);
     }
   };
 
   const removeAttendee = async (id) => {
-    await axiosInstance.delete(`http://localhost:3000/submissions/${(id)}`);
+    await axiosInstance.delete(`${process.env.BACKEND_HOST}/submissions/${(id)}`);
     setAttendees((prevAttendees) => prevAttendees.filter((item) => item.id !== id));
   };
 

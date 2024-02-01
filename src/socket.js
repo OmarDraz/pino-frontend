@@ -1,11 +1,11 @@
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:3000', {
+const socket = io(process.env.BACKEND_HOST, {
   transports: ['websocket'],
   upgrade: false,
   withCredentials: true,
   cors: {
-    origin: 'http://localhost:3001',
+    origin: process.env.FRONTEND_HOST,
     methods: ['GET', 'POST'],
   },
 });

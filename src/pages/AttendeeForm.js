@@ -80,7 +80,7 @@ const AttendeeForm = () => {
           return;
         }
 
-      const res = await axios.post('http://localhost:3000/api/attendees', {
+      const res = await axios.post(`${process.env.BACKEND_HOST}/api/attendees`, {
         ...formData,
         branchId: branchId,
       });

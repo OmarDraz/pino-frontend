@@ -16,7 +16,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', formData);
+      const response = await axios.post(`${process.env.BACKEND_HOST}/auth/login`, formData);
 
       const token = response.data.token;
 
