@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Button from '../components/Button';
 import logo from '../assets/imgs/logo.png';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Axios from '../axiosInstance';
 
 function Login() {
   const [formData, setFormData] = useState({});
@@ -16,7 +16,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.BACKEND_HOST}/auth/login`, formData);
+      const response = await Axios.post('/auth/login', formData);
 
       const token = response.data.token;
 
