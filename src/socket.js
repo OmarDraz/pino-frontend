@@ -1,11 +1,11 @@
 import io from 'socket.io-client';
 
-const socket = io(process.env.BACKEND_HOST, {
+const socket = io(process.env.REACT_APP_API_UR, {
   transports: ['websocket'],
   upgrade: false,
   withCredentials: true,
   cors: {
-    origin: process.env.FRONTEND_HOST,
+    origin: process.env.REACT_APP_CLIENT_URL,
     methods: ['GET', 'POST'],
   },
 });

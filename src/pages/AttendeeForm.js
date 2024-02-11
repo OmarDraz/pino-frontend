@@ -6,8 +6,9 @@ import logo from '../assets/imgs/logo.png';
 import MdAvTimer from '@meronex/icons/md/MdAvTimer';
 import MdEventSeat from '@meronex/icons/md/MdEventSeat';
 import MdRestaurant from '@meronex/icons/md/MdRestaurant';
-import { useLocation, useParams } from 'react-router-dom';
+import { json, useLocation, useParams } from 'react-router-dom';
 import socket from '../socket';
+import Axios from '../axiosInstance';
 
 const AttendeeForm = () => {
   const location = useLocation();
@@ -31,7 +32,12 @@ const AttendeeForm = () => {
     socket.on('welcomeMessage', (message) => {
       setWelcomeMessage(message);
     });
-
+    
+    let data =JSON.parse(localStorage.getItem("data")) 
+    if(data){
+      setModalData(data)
+      setModal(true)  
+    }
     return () => {
       socket.off('welcomeMessage');
     };
@@ -39,9 +45,9 @@ const AttendeeForm = () => {
 
 
   useEffect(() => {
+   
     if (modalData) {
 
-      // Start the countdown when modalData is available
       const countdownInterval = setInterval(async () => {
         setModalData((prevData) => ({
           ...prevData,
@@ -53,6 +59,7 @@ const AttendeeForm = () => {
       // Clear the interval when the countdown reaches 0
       if (modalData.averageWaitingTime <= 1000) {
         clearInterval(countdownInterval);
+        // localStorage.removeItem("data")
       }
  
       // Cleanup the interval on component unmount
@@ -80,7 +87,7 @@ const AttendeeForm = () => {
           return;
         }
 
-      const res = await axios.post(`${process.env.BACKEND_HOST}/api/attendees`, {
+      const res = await Axios.post('/submissions/attendee', {
         ...formData,
         branchId: branchId,
       });
@@ -93,6 +100,7 @@ const AttendeeForm = () => {
         // Disable form fields and submit button after submission
         setFormSubmitted(true);
         setModalData(res.data);
+        localStorage.setItem("data" , JSON.stringify(res.data))
         socket.emit('associateSocketId', socket.id);
       }
 

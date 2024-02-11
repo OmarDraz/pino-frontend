@@ -1,7 +1,7 @@
 // Attendees.js
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import axiosInstance from '../axiosInstance';
+import Axios from '../axiosInstance';
 import MdAccountBox from '@meronex/icons/md/MdAccountBox';
 import MdCall from '@meronex/icons/md/MdCall';
 import MdAvTimer from '@meronex/icons/md/MdAvTimer';
@@ -9,6 +9,7 @@ import FaWhatsapp from '@meronex/icons/fa/FaWhatsapp';
 import socket from '../socket';
 import FaHome from '@meronex/icons/fa/FaHome';
 import FaCloudSun from '@meronex/icons/fa/FaCloudSun';
+
 const Attendees = () => {
   const [attendees, setAttendees] = useState([]);
   const { branchId } = useParams();
@@ -40,7 +41,7 @@ const Attendees = () => {
   useEffect(() => {
     const fetchExistingWaitingAttendees = async () => {
       try {
-        const response = await axiosInstance.get(`${process.env.BACKEND_HOST}/submissions?branch_id=${parseInt(branchId)}`);
+        const response = await Axios.get(`/submissions?branch_id=${parseInt(branchId)}`);
         setAttendees(response.data);
       } catch (error) {
         console.error('Error fetching existing waiting submissions:', error);
@@ -171,14 +172,14 @@ const Attendees = () => {
 
   
       // Remove the submission from the server
-      await axiosInstance.delete(`${process.env.BACKEND_HOST}/submissions/${id}`);
+      await Axios.delete(`/submissions/${id}`);
     } catch (error) {
       console.error('Error accepting attendee:', error);
     }
   };
 
   const removeAttendee = async (id) => {
-    await axiosInstance.delete(`${process.env.BACKEND_HOST}/submissions/${(id)}`);
+    await Axios.delete(`/submissions/${(id)}`);
     setAttendees((prevAttendees) => prevAttendees.filter((item) => item.id !== id));
   };
 

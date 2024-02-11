@@ -1,17 +1,17 @@
 import axios from 'axios';
 
-const axiosInstance = axios.create({
-  baseURL: process.env.BACKEND_HOST,
+const Axios = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 // Request interceptor to attach the token
-axiosInstance.interceptors.request.use(
+Axios.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `${token}`;
     }
-    return config;
+    return config;  
   },
   (error) => {
     return Promise.reject(error);
@@ -19,7 +19,7 @@ axiosInstance.interceptors.request.use(
 );
 
 // Response interceptor to check token expiration
-axiosInstance.interceptors.response.use(
+Axios.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -51,4 +51,4 @@ function parseJwt(token) {
   }
 }
 
-export default axiosInstance;
+export default Axios;

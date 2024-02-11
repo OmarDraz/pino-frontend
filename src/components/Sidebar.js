@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import logo from '../assets/imgs/logo.png'
 import MdEventSeat from '@meronex/icons/md/MdEventSeat';
+import MdInsertDriveFile from '@meronex/icons/md/MdInsertDriveFile';
 import FaCaretRight from '@meronex/icons/fa/FaCaretRight';
 import EnLogOut from '@meronex/icons/en/EnLogOut';
 import {NavLink, useNavigate} from 'react-router-dom'
